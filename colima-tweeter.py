@@ -22,12 +22,15 @@ lunch.append("All our weekly lunch specials are served with rice and beans at @C
 lunch.append("All our weekly lunch specials are served with rice and beans at @ColimaMexican restaurant. Phone: 559-627-2197")
 lunch.append("All our weekly lunch specials are served with rice and beans at @ColimaMexican restaurant. Phone: 559-627-2197")
 lunch.append("Two enchiladas with chicken, beef or cheese - is one of our weekly lunch specials dish at @ColimaMexican restaurant. Phone: 559-627-2197")
-lunch.append("")
-
 
 snack = []
 
 dinner = []
+dinner.append("Chili colorado, chili verde, chiles rellenos, machaka con huevo and more from the dinner menu at @ColimaMexican restaurant. Call 559-627-2197")
+dinner.append("Pollo Veracruz, pollo suizo, pollo a la casa, pollo al cilantro, pollo a la parilla and more from the dinner menu at @ColimaMexican restaurant. Phone 559-627-2197")
+dinner.append("Carnitas, carne asada, steak picado, steak ranchero, puntas steak and more from the dinner menu at @ColimaMexican restaurant. Phone 559-627-2197")
+dinner.append("Carne asada y camarones, fajitas de pollo a res, fajitas de camaron, fajitas mar y tierra and more from the dinner menu at @ColimaMexican restaurant. Phone 559-627-2197")
+dinner.append("Ostiones, campechana, la vanta muertos, la vanta muertos con ostiones, seafood cocktails and more fresh seafood at @ColimaMexican restaurant. Phone 559-627-2197")
 
 tweet = []
 tweet.append("Chorizo @ColimaMexican")
@@ -104,37 +107,44 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 # authentication of access token and secret 
 auth.set_access_token(access_token, access_token_secret) 
 api = tweepy.API(auth) 
-    
-randomTweet=tweet[random.randint(0, 5)];
-print(randomTweet)
+
+# randomTweet=tweet[random.randint(0, 5)];
+# print(randomTweet)
 
 now = datetime.now()
 
 current_hour = now.strftime("%H")
+current_minute = now.strftime("%M")
+print(current_hour + ":" + current_minute)
+
 randomTweet = ""
 
 if int(current_hour) == 11:
-    randomTweet=eleven[random.randint(0, len(eleven)-1)];
-    print(randomTweet)
-    exit(0)
+    if int(current_minute) > 29:
+      randomTweet=lunch[random.randint(0, len(lunch)-1)]
+    else:
+      randomTweet=eleven[random.randint(0, len(eleven)-1)];
 
 if int(current_hour) == 9:
-    randomTweet=nine[random.randint(0, len(nine)-1)];
-    print(randomTweet)
-    exit(0)
+    if int(current_minute) > 29:
+      randomTweet=breakfast[random.randint(0, len(breakfast)-1)]
+    else:
+      randomTweet=nine[random.randint(0, len(nine)-1)];
 
-if int(current_hour) == 5:
-    randomTweet=five[random.randint(0, len(five)-1)];
-    print(randomTweet)
-    exit(0)
+if int(current_hour) == 17:
+    if int(current_minute) > 29:
+      randomTweet=dinner[random.randint(0, len(dinner)-1)]
+    else:
+      randomTweet=five[random.randint(0, len(five)-1)];
 
-if int(current_hour) == 6:
-    randomTweet=six[random.randint(0, len(six)-1)];
-    print(randomTweet)
-    exit(0)
+if int(current_hour) == 18:
+    if int(current_minute) > 29:
+      randomTweet=dinner[random.randint(0, len(dinner)-1)]
+    else:
+      randomTweet=six[random.randint(0, len(six)-1)];
 
+print(randomTweet)
 
 # update the status 
 # api.update_status(status ="Testing random tweet: " + randomTweet)
-
 
